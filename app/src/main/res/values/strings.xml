@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">ToDoApp</string>
+
+    <string-array name="statusSpinner">
+        <item color="@colors/Gris2">To do</item>
+        <item>In progress</item>
+        <item>Done</item>
+        <item>Bug</item>
+    </string-array>
+</resources>
+
