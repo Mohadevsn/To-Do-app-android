@@ -44,6 +44,9 @@
             android:layout_below="@+id/title_box"
             android:id="@+id/task_list"
             android:layout_marginTop="20sp"
+            android:clickable="true"
+            android:focusable="true"
+            android:divider="@drawable/divider"
             />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton

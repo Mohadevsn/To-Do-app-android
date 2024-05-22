@@ -43,6 +43,8 @@ public class TaskAdapter extends ArrayAdapter<Task> {
             row = inflater.inflate(layoutId, parent, false);
         }
 
+        String border;
+
         TextView taskName = row.findViewById(R.id.taskName);
         Button statusButton = row.findViewById(R.id.statusButton);
 
@@ -61,6 +63,23 @@ public class TaskAdapter extends ArrayAdapter<Task> {
                 default:
                     colorId = R.color.Rouge;
             }
+
+            switch (task.getStatus().toLowerCase()) {
+                case "to do":
+                    row.setBackgroundResource(R.drawable.border_gris2);
+                    break;
+                case "in progress":
+                    row.setBackgroundResource(R.drawable.boder_bleu);
+                    break;
+                case "done":
+                    row.setBackgroundResource(R.drawable.border_vert);
+                    break;
+                default:
+                    row.setBackgroundResource(R.drawable.border_red);
+            }
+
+
+
             statusButton.setBackgroundColor(ContextCompat.getColor(context, colorId));
         }
 

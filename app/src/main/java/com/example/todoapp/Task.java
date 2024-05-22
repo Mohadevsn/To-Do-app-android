@@ -2,7 +2,9 @@ package com.example.todoapp;
 
 import android.graphics.PorterDuff;
 
-public class Task {
+import java.io.Serializable;
+
+public class Task implements Serializable {
     private String taskName;
     private String description;
     private String status;
