@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 
 import java.util.ArrayList;
 
@@ -46,10 +47,21 @@ public class TaskAdapter extends ArrayAdapter<Task> {
         Button statusButton = row.findViewById(R.id.statusButton);
 
         Task task = getItem(position);
+        int colorId;
 
         if (task != null) {
             taskName.setText(task.getTaskName());
-            statusButton.setText(task.getStatus());
+            switch (task.getStatus().toLowerCase()){
+                case "to do": colorId = R.color.Gris2;
+                break;
+                case "in progress": colorId = R.color.Bleu;
+                break;
+                case "done": colorId = R.color.Vert;
+                break;
+                default:
+                    colorId = R.color.Rouge;
+            }
+            statusButton.setBackgroundColor(ContextCompat.getColor(context, colorId));
         }
 
         return row;

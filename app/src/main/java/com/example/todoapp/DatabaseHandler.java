@@ -50,7 +50,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         contentValues.put(descriptionCol, description);
         contentValues.put(statusCol, status);
 
-        db.insert(tableName, null,contentValues);
+        db.insert(tableName, null, contentValues);
         db.close();
     }
 

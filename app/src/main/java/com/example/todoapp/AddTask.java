@@ -9,6 +9,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -46,23 +47,27 @@ public class AddTask extends AppCompatActivity {
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Get the values from the EditTexts and Spinner
                 nameStr = name.getText().toString();
                 descriptionStr = description.getText().toString();
                 statusStr = spinner.getSelectedItem().toString();
 
-                // Now you can use these strings, for example to add the task to the database
-
-                try {
-                    DatabaseHandler db = new DatabaseHandler(AddTask.this, "toDodb", null, 1);
-                    db.addTask(nameStr, descriptionStr, statusStr);
-                }catch (Exception e){
-                    Log.e("connection failed", "exception", null);
+                if(nameStr.isEmpty() && descriptionStr.isEmpty()){
+                    Toast.makeText(AddTask.this, "Remplissez tous les champs", Toast.LENGTH_LONG).show();
                 }
 
+                else {
+                    try {
+                        DatabaseHandler db = new DatabaseHandler(AddTask.this, "toDodb", null, 1);
+                        db.addTask(nameStr, descriptionStr, statusStr);
+                    }catch (Exception e){
+                        Log.e("connection failed", "exception", null);
+                    }
+                }
 
                 // Optionally, you can log the values to check if they are correct
                 Log.d("AddTask", "Task Name: " + nameStr + ", Description: " + descriptionStr + ", Status: " + statusStr);
+                name.setText("");
+                description.setText("");
             }
         });
 
