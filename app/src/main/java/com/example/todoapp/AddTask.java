@@ -66,8 +66,7 @@ public class AddTask extends AppCompatActivity {
 
                 // Optionally, you can log the values to check if they are correct
                 Log.d("AddTask", "Task Name: " + nameStr + ", Description: " + descriptionStr + ", Status: " + statusStr);
-                name.setText("");
-                description.setText("");
+                finish();
             }
         });
 

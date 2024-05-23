@@ -4,24 +4,22 @@ import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
-import android.database.DatabaseErrorHandler;
+import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.widget.Toast;
+import android.util.Log;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
 
 public class DatabaseHandler extends SQLiteOpenHelper {
 
-    private String databaseName = "toDodb";
-    private String tableName = "tasks";
-    private String idCol = "id";
-    private String taskNameCol = "name";
-    private String descriptionCol = "description";
-    private String statusCol = "status";
+    private final String tableName = "tasks";
+    private final String idCol = "id";
+    private final String taskNameCol = "name";
+    private final String descriptionCol = "description";
+    private final String statusCol = "status";
 
 
     public DatabaseHandler(@Nullable Context context, @Nullable String name, @Nullable SQLiteDatabase.CursorFactory factory, int version) {
@@ -43,14 +41,14 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     public void addTask(String taskName, String description, String status){
         SQLiteDatabase db = this.getWritableDatabase();
-
+        int id;
         ContentValues contentValues = new ContentValues();
 
         contentValues.put(taskNameCol, taskName);
         contentValues.put(descriptionCol, description);
         contentValues.put(statusCol, status);
 
-        db.insert(tableName, null, contentValues);
+        id= (int) db.insert(tableName, null, contentValues);
         db.close();
     }
 
@@ -64,6 +62,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         if(taskCursor.moveToFirst()){
             do {
                 taskArrayList.add(new Task(
+                        taskCursor.getInt(0),
                         taskCursor.getString(1),
                         taskCursor.getString(2),
                         taskCursor.getString(3)));
@@ -73,11 +72,30 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         return taskArrayList;
     }
 
+    public void updateTask(String id,String taskName, String description, String status){
+        SQLiteDatabase db = this.getWritableDatabase();
+        int numberRows = 0;
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(taskNameCol, taskName);
+        contentValues.put(descriptionCol, description);
+        contentValues.put(statusCol, status);
+
+        try{
+            numberRows = db.update(tableName, contentValues, idCol + "=?", new String [] {id});
+        }catch (SQLException e ){
+            Log.e("Sql Exception", "updateTask: "+ e.getMessage(), null);
+        }
+        Log.e("Update", "Rows affected: " +numberRows, null);
+        db.close();
+    }
+
+
+
+
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         // this method is called to check if the table exists already.
         db.execSQL("DROP TABLE IF EXISTS " + tableName);
         onCreate(db);
     }
-
 
 }

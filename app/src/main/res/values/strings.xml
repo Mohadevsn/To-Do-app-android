@@ -7,5 +7,12 @@
         <item>Done</item>
         <item>Bug</item>
     </string-array>
+
+    <string-array name="filterStatusSpinner">
+        <item>To do</item>
+        <item>In progress</item>
+        <item>Done</item>
+        <item>Bug</item>
+    </string-array>
 </resources>
 

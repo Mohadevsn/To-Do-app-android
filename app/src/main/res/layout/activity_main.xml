@@ -28,15 +28,22 @@
                 android:layout_centerVertical="true"
             />
             <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="30sp"
+                android:layout_height="30sp"
                 android:src="@drawable/filter"
+                android:id="@+id/filter"
                 android:layout_alignParentEnd="true"
                 android:background="@color/Gris"
                 android:layout_centerVertical="true"
+                android:clickable="true"
+                android:focusable="true"
+                android:layout_marginRight="20dp"
                 />
 
+
         </RelativeLayout>
+
+
 
         <ListView
             android:layout_width="match_parent"
@@ -44,8 +51,7 @@
             android:layout_below="@+id/title_box"
             android:id="@+id/task_list"
             android:layout_marginTop="20sp"
-            android:clickable="true"
-            android:focusable="true"
+
             android:divider="@drawable/divider"
             />
 
@@ -58,9 +64,71 @@
             android:layout_alignParentBottom="true"
             android:backgroundTint="@color/Gris2"
             android:layout_marginBottom="20sp"
+            android:layout_marginEnd="15sp"
         />
 
+        <RelativeLayout
+            android:id="@+id/filterActionMenu"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_below="@+id/title_box"
+            android:background="@color/white"
+            android:backgroundTint="#ECE9E9"
+
+            android:visibility="invisible"
+            tools:ignore="MissingConstraints">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="200dp"
+                android:text="Filter par :" />
+
+            <CheckBox
+                android:id="@+id/toDoCheck"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/filterActionMenu"
+                android:text="To do"
+                tools:ignore="NotSibling" />
+
+            <CheckBox
+                android:id="@+id/inProgressCheck"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/toDoCheck"
+                android:text="In progress" />
+
+            <CheckBox
+                android:id="@+id/doneCheck"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/inProgressCheck"
+                android:text="Done" />
+
+            <CheckBox
+                android:id="@+id/bugCheck"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/doneCheck"
+                android:text="bug" />
+
+            <Button
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/bugCheck"
+                android:layout_centerHorizontal="true"
+                android:backgroundTint="@color/Gris2"
+                android:clickable="true"
+                android:focusable="true"
+                android:text="Appliquer"
+                android:id="@+id/appliquerFiltre"/>
+
+        </RelativeLayout>
+
     </RelativeLayout>
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

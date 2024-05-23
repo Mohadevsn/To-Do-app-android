@@ -88,7 +88,7 @@
         <Button
             android:layout_width="200sp"
             android:layout_height="wrap_content"
-            android:id="@+id/addButton"
+            android:id="@+id/modifyButton"
             android:layout_below="@+id/description"
             android:layout_centerHorizontal="true"
             android:text="Modifier"

@@ -1,10 +1,15 @@
 package com.example.todoapp;
 
-import android.graphics.PorterDuff;
-
 import java.io.Serializable;
 
 public class Task implements Serializable {
+
+    private int id;
+
+    public int getId() {
+        return id;
+    }
+
     private String taskName;
     private String description;
     private String status;
@@ -22,7 +27,8 @@ public class Task implements Serializable {
         return status;
     }
 
-    public Task(String taskName, String description, String status) {
+    public Task(int id, String taskName, String description, String status) {
+        this.id = id;
         this.taskName = taskName;
         this.description = description;
         this.status = status;
