@@ -79,6 +79,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         contentValues.put(taskNameCol, taskName);
         contentValues.put(descriptionCol, description);
         contentValues.put(statusCol, status);
+        Log.e("update", "Status : "+ status, null);
 
         try{
             numberRows = db.update(tableName, contentValues, idCol + "=?", new String [] {id});
@@ -87,6 +88,27 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         }
         Log.e("Update", "Rows affected: " +numberRows, null);
         db.close();
+    }
+
+    public ArrayList<Task> filterTaskTodo(){
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "SELECT * from "+ tableName+" WHERE "+ statusCol +" = 'to do';";
+
+        @SuppressLint("Recycle")
+        Cursor taskCursor = db.rawQuery(query, null);
+        ArrayList<Task> taskArrayList = new ArrayList<>();
+
+        if(taskCursor.moveToFirst()){
+            do {
+                taskArrayList.add(new Task(
+                        taskCursor.getInt(0),
+                        taskCursor.getString(1),
+                        taskCursor.getString(2),
+                        taskCursor.getString(3)));
+            }while (taskCursor.moveToNext());
+        }
+        taskCursor.close();
+        return taskArrayList;
     }
 
 

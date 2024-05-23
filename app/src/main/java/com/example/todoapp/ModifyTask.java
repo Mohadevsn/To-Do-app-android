@@ -91,6 +91,7 @@ public class ModifyTask extends AppCompatActivity {
                 databaseHandler = new DatabaseHandler(v.getContext(), "toDodb", null, 1);
                 try {
                     databaseHandler.updateTask(idStr,name.getText().toString(), description.getText().toString(), spinner.getSelectedItem().toString() );
+                    Toast.makeText(v.getContext(), "Select on spinner:"+ spinner.getSelectedItem().toString(), Toast.LENGTH_LONG).show();
                 }catch (SQLException e){
                     Log.e("modify", "onClick: modify Button", null);
                 }

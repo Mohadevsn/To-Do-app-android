@@ -4,15 +4,15 @@ import java.io.Serializable;
 
 public class Task implements Serializable {
 
-    private int id;
+    private final int id;
 
     public int getId() {
         return id;
     }
 
-    private String taskName;
-    private String description;
-    private String status;
+    private final String taskName;
+    private final String description;
+    private final String status;
 
 
     public String getTaskName() {

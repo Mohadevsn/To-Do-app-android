@@ -76,11 +76,13 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 databaseHandler = new DatabaseHandler(v.getContext(), "toDodb", null, 1);
 
-                String toDoSelected = toDo.getText().toString();
-                String inProgressSelected = inProgress.getText().toString();
-                String doneSelected = done.getText().toString();
-                String bugSelected = bug.getText().toString();
-                Log.e("checkbox test", "onClick: to do ="+ toDo.getText(), null);
+                CheckBox toDoSelected = findViewById(R.id.toDoCheck);
+                Boolean toDoChecked = toDoSelected.isChecked();
+
+                if(toDoChecked){
+                    databaseHandler.filterTaskTodo();
+                }
+                Log.e("checkbox test", "onClick: to do ="+ toDoChecked, null);
                 //taskArrayList = databaseHandler.filterResult(toDoSelected);
 
 

@@ -43,15 +43,12 @@
 
         </RelativeLayout>
 
-
-
         <ListView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/title_box"
             android:id="@+id/task_list"
             android:layout_marginTop="20sp"
-
             android:divider="@drawable/divider"
             />
 
@@ -65,7 +62,7 @@
             android:backgroundTint="@color/Gris2"
             android:layout_marginBottom="20sp"
             android:layout_marginEnd="15sp"
-        />
+            android:importantForAccessibility="no" />
 
         <RelativeLayout
             android:id="@+id/filterActionMenu"
@@ -75,7 +72,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_below="@+id/title_box"
             android:background="@color/white"
-            android:backgroundTint="#ECE9E9"
+            android:backgroundTint="#FFFFFF"
 
             android:visibility="invisible"
             tools:ignore="MissingConstraints">
@@ -83,14 +80,18 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="200dp"
-                android:text="Filter par :" />
+                android:text="Filter par :"
+                android:layout_marginLeft="20sp"
+                />
 
             <CheckBox
                 android:id="@+id/toDoCheck"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/filterActionMenu"
+                android:layout_marginTop="10dp"
                 android:text="To do"
+                android:layout_marginLeft="20sp"
                 tools:ignore="NotSibling" />
 
             <CheckBox
@@ -98,6 +99,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/toDoCheck"
+                android:layout_marginLeft="20sp"
                 android:text="In progress" />
 
             <CheckBox
@@ -105,6 +107,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/inProgressCheck"
+                android:layout_marginLeft="20sp"
                 android:text="Done" />
 
             <CheckBox
@@ -112,6 +115,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/doneCheck"
+                android:layout_marginLeft="20sp"
                 android:text="bug" />
 
             <Button

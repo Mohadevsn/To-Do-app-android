@@ -43,7 +43,6 @@ public class TaskAdapter extends ArrayAdapter<Task> {
             row = inflater.inflate(layoutId, parent, false);
         }
 
-        String border;
 
         TextView taskName = row.findViewById(R.id.taskName);
         Button statusButton = row.findViewById(R.id.statusButton);
