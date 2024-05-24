@@ -14,12 +14,14 @@ import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class TaskAdapter extends ArrayAdapter<Task> {
 
     private final Context context;
     private final int layoutId;
-    private final ArrayList<Task> data;
+    private ArrayList<Task> data;
+    List<Task> tasks;
 
     public TaskAdapter(@NonNull Context context, int resource, ArrayList<Task> tasks) {
         super(context, resource, tasks);
@@ -83,5 +85,13 @@ public class TaskAdapter extends ArrayAdapter<Task> {
         }
 
         return row;
+    }
+
+    public void updateTaskList(ArrayList<Task> newTasks) {
+
+
+        this.data.clear();
+        this.data.addAll(newTasks);
+        notifyDataSetChanged();
     }
 }

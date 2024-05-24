@@ -12,6 +12,8 @@ import android.util.Log;
 import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class DatabaseHandler extends SQLiteOpenHelper {
 
@@ -20,6 +22,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     private final String taskNameCol = "name";
     private final String descriptionCol = "description";
     private final String statusCol = "status";
+    ArrayList<Task> taskArrayList = new ArrayList<>();
 
 
     public DatabaseHandler(@Nullable Context context, @Nullable String name, @Nullable SQLiteDatabase.CursorFactory factory, int version) {
@@ -57,7 +60,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
         @SuppressLint("Recycle")
         Cursor taskCursor = db.rawQuery("SELECT * from " + tableName , null);
-        ArrayList<Task> taskArrayList = new ArrayList<>();
 
         if(taskCursor.moveToFirst()){
             do {
@@ -69,6 +71,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             }while (taskCursor.moveToNext());
         }
         taskCursor.close();
+        Log.e("dbhandler", "readTask: taskArrayList"+ taskArrayList, null);
         return taskArrayList;
     }
 
@@ -90,13 +93,28 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         db.close();
     }
 
-    public ArrayList<Task> filterTaskTodo(){
+    public ArrayList<Task> filter(ArrayList<String> status){
         SQLiteDatabase db = this.getReadableDatabase();
-        String query = "SELECT * from "+ tableName+" WHERE "+ statusCol +" = 'to do';";
+        //String query = "SELECT * from "+ tableName+" WHERE "+ statusCol +" = 'to do';";
+        if(status.isEmpty()){
+            return readTask();
+        }
+        StringBuilder queryBuilder = new StringBuilder("SELECT * FROM "+tableName+ " WHERE ");
+        for (int i = 0; i < status.size(); i++){
+            queryBuilder.append(statusCol+" =? ");
+            if(i < status.size()-1){
+                queryBuilder.append(" OR ");
+            }
+        }
 
-        @SuppressLint("Recycle")
-        Cursor taskCursor = db.rawQuery(query, null);
-        ArrayList<Task> taskArrayList = new ArrayList<>();
+        Log.e("dbHandler", "filter: queryBuilder " + queryBuilder, null);
+        Log.e("dbHandler", "filter: status size " + status.size(), null);
+        String[] statusArray = status.toArray(new String[0]);
+        Log.e("dbHandler", "filter: StatusArray: " + Arrays.toString(statusArray), null);
+        Cursor taskCursor = db.rawQuery(queryBuilder.toString(), statusArray);
+
+        // Log cursor count to see if there are any results
+        Log.e("dbHandler", "filter: Cursor count " + taskCursor.getCount(), null);
 
         if(taskCursor.moveToFirst()){
             do {
@@ -108,9 +126,10 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             }while (taskCursor.moveToNext());
         }
         taskCursor.close();
+
+        Log.e("dbHandler", "filter: TaskArrayList : "+ taskArrayList, null);
         return taskArrayList;
     }
-
 
 
 

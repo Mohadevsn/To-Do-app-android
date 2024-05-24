@@ -21,6 +21,7 @@ import androidx.core.view.WindowInsetsCompat;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -32,6 +33,14 @@ public class MainActivity extends AppCompatActivity {
     ImageButton imageButton;
     RelativeLayout filterActionMenu;
     Button appliquer;
+    CheckBox todo;
+    CheckBox inProgress;
+    CheckBox done;
+    CheckBox bug;
+
+
+
+    // onCreate function
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -44,16 +53,17 @@ public class MainActivity extends AppCompatActivity {
         goAdd = findViewById(R.id.goAdd);
         imageButton = findViewById(R.id.filter);
         filterActionMenu =  findViewById(R.id.filterActionMenu);
-        CheckBox toDo, inProgress, done, bug ;
-
-        toDo = findViewById(R.id.toDoCheck);
-        inProgress = findViewById(R.id.inProgressCheck);
-        done = findViewById(R.id.doneCheck);
-        bug = findViewById(R.id.bugCheck);
         appliquer = findViewById(R.id.appliquerFiltre);
 
         databaseHandler = new DatabaseHandler(this, "toDodb", null, 1);
-        taskArrayList = databaseHandler.readTask();
+        if(getChecked().isEmpty()){
+            taskArrayList = databaseHandler.readTask();
+        }
+        else {
+            taskArrayList = databaseHandler.filter(getChecked());
+        }
+
+        // this following function show the filter menu
 
         imageButton.setOnClickListener(new View.OnClickListener() {
             int count = 0 ;
@@ -71,24 +81,22 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        // The applique button launch the filtering
+
         appliquer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 databaseHandler = new DatabaseHandler(v.getContext(), "toDodb", null, 1);
+                taskArrayList = databaseHandler.filter(getChecked());
 
-                CheckBox toDoSelected = findViewById(R.id.toDoCheck);
-                Boolean toDoChecked = toDoSelected.isChecked();
-
-                if(toDoChecked){
-                    databaseHandler.filterTaskTodo();
-                }
-                Log.e("checkbox test", "onClick: to do ="+ toDoChecked, null);
                 //taskArrayList = databaseHandler.filterResult(toDoSelected);
-
-
+                Log.e("Mainactivity", "onClick: appliquer", null);
+                taskAdapter.updateTaskList(taskArrayList);
+                filterActionMenu.setVisibility(View.INVISIBLE);
             }
-        });
 
+
+        });
 
 
         Log.d("MainActivity", "Tasks loaded: " + taskArrayList.size()); // Check if tasks are loaded
@@ -96,6 +104,8 @@ public class MainActivity extends AppCompatActivity {
         listView = findViewById(R.id.task_list);
         taskAdapter = new TaskAdapter(this, R.layout.row, taskArrayList);
         listView.setAdapter(taskAdapter);
+
+        // when we click on the item it start the modify activity
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -109,6 +119,8 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
+
+        // this give as the possibility to add new task
 
         goAdd.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -125,10 +137,33 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    public ArrayList<String> getChecked(){
+        ArrayList<String> checkedStatus = new ArrayList<>();
+
+        todo = findViewById(R.id.toDoCheck);
+        inProgress = findViewById(R.id.inProgressCheck);
+        done = findViewById(R.id.doneCheck);
+        bug = findViewById(R.id.bugCheck);
+
+        if(todo.isChecked()){
+            checkedStatus.add("To do");
+        }
+        if(inProgress.isChecked()){
+            checkedStatus.add("In progress");
+        }
+        if(done.isChecked()){
+            checkedStatus.add("Done");
+        }
+        if(bug.isChecked()){
+            checkedStatus.add("Bug");
+        }
+
+        return checkedStatus;
+    }
+
     @Override
     protected void onRestart() {
         super.onRestart();
-        databaseHandler = new DatabaseHandler(this, "toDodb", null, 1);
-        taskArrayList = databaseHandler.readTask();
+
     }
 }
