@@ -14,7 +14,7 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="50sp"
+            android:layout_height="60sp"
             android:id="@+id/title_box"
             android:background="@color/Gris"
             >
@@ -23,6 +23,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/appName"
                 android:text="@string/app_name"
+                android:layout_marginLeft="30dp"
                 android:textColor="@color/white"
                 android:textSize="24sp"
                 android:layout_centerVertical="true"
@@ -49,6 +50,8 @@
             android:layout_below="@+id/title_box"
             android:id="@+id/task_list"
             android:layout_marginTop="20sp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:divider="@drawable/divider"
             />
 
@@ -70,9 +73,9 @@
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_below="@+id/title_box"
-            android:background="@color/white"
-            android:backgroundTint="#FFFFFF"
+            android:layout_marginTop="45dp"
+            android:layout_marginRight="30dp"
+            android:background="@drawable/border_black"
 
             android:visibility="invisible"
             tools:ignore="MissingConstraints">
@@ -91,6 +94,7 @@
                 android:layout_below="@+id/filterActionMenu"
                 android:layout_marginTop="10dp"
                 android:text="To do"
+                android:textSize="25sp"
                 android:layout_marginLeft="20sp"
                 tools:ignore="NotSibling" />
 
@@ -100,7 +104,9 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/toDoCheck"
                 android:layout_marginLeft="20sp"
-                android:text="In progress" />
+                android:text="In progress"
+                android:textSize="23sp"
+                />
 
             <CheckBox
                 android:id="@+id/doneCheck"
@@ -108,6 +114,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/inProgressCheck"
                 android:layout_marginLeft="20sp"
+                android:textSize="25sp"
                 android:text="Done" />
 
             <CheckBox
@@ -116,7 +123,9 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/doneCheck"
                 android:layout_marginLeft="20sp"
-                android:text="bug" />
+                android:text="bug"
+                android:textSize="25sp"
+                />
 
             <Button
                 android:layout_width="150dp"

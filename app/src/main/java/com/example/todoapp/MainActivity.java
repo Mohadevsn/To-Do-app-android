@@ -63,23 +63,7 @@ public class MainActivity extends AppCompatActivity {
             taskArrayList = databaseHandler.filter(getChecked());
         }
 
-        // this following function show the filter menu
 
-        imageButton.setOnClickListener(new View.OnClickListener() {
-            int count = 0 ;
-            @Override
-            public void onClick(View v) {
-                if(count % 2 == 0){
-                    filterActionMenu.setVisibility(View.VISIBLE);
-                }
-                else {
-                    filterActionMenu.setVisibility(View.INVISIBLE);
-                }
-                count++;
-
-
-            }
-        });
 
         // The applique button launch the filtering
 
@@ -120,6 +104,31 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        // this following function show the filter menu
+
+        imageButton.setOnClickListener(new View.OnClickListener() {
+            int count = 0 ;
+            @Override
+            public void onClick(View v) {
+                if(count % 2 == 0){
+                    filterActionMenu.setVisibility(View.VISIBLE);
+                    listView.setClickable(false);
+                    listView.setFocusable(false);
+                    Log.e("Mainactivity", "onClick visible: list is clickable "+ listView.isClickable(), null);
+
+                }
+                else {
+                    filterActionMenu.setVisibility(View.INVISIBLE);
+                    listView.setClickable(true);
+                    listView.setFocusable(true);
+                    Log.e("Mainactivity", "onClick invisible: list  is clickable "+ listView.isClickable(), null);
+                }
+                count++;
+
+
+            }
+        });
+
         // this give as the possibility to add new task
 
         goAdd.setOnClickListener(new View.OnClickListener() {
@@ -137,6 +146,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    // This function returns the checkedbox for filter in the databaseHandler
     public ArrayList<String> getChecked(){
         ArrayList<String> checkedStatus = new ArrayList<>();
 
@@ -164,6 +174,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onRestart() {
         super.onRestart();
-
+        filterActionMenu.setVisibility(View.INVISIBLE);
     }
 }

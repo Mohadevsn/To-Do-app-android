@@ -55,30 +55,26 @@ public class TaskAdapter extends ArrayAdapter<Task> {
         if (task != null) {
             taskName.setText(task.getTaskName());
             switch (task.getStatus().toLowerCase()){
-                case "to do": colorId = R.color.Gris2;
-                break;
-                case "in progress": colorId = R.color.Bleu;
-                break;
-                case "done": colorId = R.color.Vert;
-                break;
-                default:
-                    colorId = R.color.Rouge;
-            }
-
-            switch (task.getStatus().toLowerCase()) {
-                case "to do":
+                case "to do": {
+                    colorId = R.color.Gris2;
                     row.setBackgroundResource(R.drawable.border_gris2);
-                    break;
-                case "in progress":
+                }
+                break;
+                case "in progress": {
+                    colorId = R.color.Bleu;
                     row.setBackgroundResource(R.drawable.boder_bleu);
-                    break;
-                case "done":
+                }
+                break;
+                case "done": {
+                    colorId = R.color.Vert;
                     row.setBackgroundResource(R.drawable.border_vert);
-                    break;
-                default:
+                }
+                break;
+                default: {
+                    colorId = R.color.Rouge;
                     row.setBackgroundResource(R.drawable.border_red);
+                }
             }
-
 
 
             statusButton.setBackgroundColor(ContextCompat.getColor(context, colorId));
