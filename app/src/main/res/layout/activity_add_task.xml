@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
@@ -12,48 +11,48 @@
         android:layout_height="match_parent">
 
         <RelativeLayout
+            android:id="@+id/title_box"
             android:layout_width="match_parent"
             android:layout_height="60sp"
-            android:id="@+id/title_box"
-            android:background="@color/Gris"
-            >
+            android:background="@color/Gris">
+
             <TextView
+                android:id="@+id/appName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/appName"
-                android:text="@string/app_name"
-                android:layout_marginLeft="30dp"
-                android:textColor="@color/white"
-                android:textSize="24sp"
                 android:layout_centerVertical="true"
-                />
+                android:layout_marginLeft="30dp"
+                android:text="@string/app_name"
+                android:textColor="@color/white"
+                android:textSize="24sp" />
 
         </RelativeLayout>
 
 
         <RelativeLayout
+            android:id="@+id/selectionZone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/title_box"
             android:layout_marginTop="20sp"
-            android:id="@+id/selectionZone"
 
-        >
+            >
+
             <TextView
+                android:id="@+id/activity_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Ajouter"
-                android:textStyle="bold"
-                android:id="@+id/activity_title"
-                android:layout_marginLeft="20sp"
                 android:layout_centerVertical="true"
+                android:layout_marginLeft="20sp"
+                android:text="Ajouter"
                 android:textSize="22sp"
+                android:textStyle="bold"
                 tools:ignore="HardcodedText,RtlHardcoded" />
 
             <Spinner
-                android:layout_width="150sp"
-                android:layout_height="wrap_content"
                 android:id="@+id/statusSpinner"
+                android:layout_width="150sp"
+                android:layout_height="50dp"
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
                 android:background="@drawable/border_gris2"
@@ -62,62 +61,63 @@
         </RelativeLayout>
 
         <EditText
+            android:id="@+id/name"
             android:layout_width="match_parent"
-            android:layout_marginStart="10sp"
-            android:layout_marginEnd="10sp"
-            android:background="@drawable/border_gris2"
             android:layout_height="wrap_content"
             android:layout_below="@+id/selectionZone"
-            android:hint="Nouvelle tache"
-            android:id="@+id/name"
-            android:layout_marginTop="20sp"
             android:layout_centerHorizontal="true"
-            tools:ignore="HardcodedText" />
+            android:layout_marginStart="10sp"
+            android:layout_marginTop="20sp"
+            android:layout_marginEnd="10sp"
+            android:background="@drawable/border_gris2"
+            android:hint="Nouvelle tache"
+            android:inputType="text"
+            android:minHeight="48dp"
+            tools:ignore="Autofill,HardcodedText" />
 
         <EditText
             android:id="@+id/description"
             android:layout_width="match_parent"
-            android:layout_height="200sp"
+            android:layout_height="180sp"
             android:layout_below="@+id/name"
             android:layout_centerHorizontal="true"
             android:layout_marginStart="10sp"
             android:layout_marginTop="9dp"
             android:layout_marginEnd="10sp"
             android:background="@drawable/border_gris2"
-            android:hint="Add task description"
             android:gravity="top|start"
+            android:hint="Add task description"
             android:textAlignment="viewStart"
-            tools:ignore="HardcodedText" />
+            tools:ignore="HardcodedText,TextFields"
+            android:inputType="text"
+            android:importantForAutofill="no" />
 
         <Button
+            android:id="@+id/addButton"
             android:layout_width="200sp"
             android:layout_height="wrap_content"
-            android:id="@+id/addButton"
             android:layout_below="@+id/description"
             android:layout_centerHorizontal="true"
-            android:text="Ajouter"
-            android:textSize="20sp"
             android:layout_marginTop="40sp"
             android:backgroundTint="@color/Gris2"
+            android:text="Ajouter"
+            android:textSize="20sp"
             tools:ignore="HardcodedText" />
 
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:layout_width="100sp"
-                android:layout_height="wrap_content"
-                android:id="@+id/cancel"
-                android:src="@drawable/icons8_close"
-                android:backgroundTint="@color/Gris2"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentBottom="true"
-                android:layout_marginBottom="10sp"
-                android:layout_marginEnd="10sp"
-
-                tools:ignore="ContentDescription" />
-
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/cancel"
+            android:layout_width="100sp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="10sp"
+            android:layout_marginBottom="10sp"
+            android:backgroundTint="@color/Gris2"
+            android:src="@drawable/icons8_close"
+            tools:ignore="ContentDescription" />
 
 
     </RelativeLayout>
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

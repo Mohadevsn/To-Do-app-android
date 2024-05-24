@@ -51,14 +51,15 @@ public class AddTask extends AppCompatActivity {
                 descriptionStr = description.getText().toString();
                 statusStr = spinner.getSelectedItem().toString();
 
-                if(nameStr.isEmpty() && descriptionStr.isEmpty()){
-                    Toast.makeText(AddTask.this, "Remplissez tous les champs", Toast.LENGTH_LONG).show();
+                if(nameStr.isEmpty() ){
+                    Toast.makeText(AddTask.this, "Une tache sans nom n'est pas valide", Toast.LENGTH_LONG).show();
                 }
 
                 else {
                     try {
                         DatabaseHandler db = new DatabaseHandler(AddTask.this, "toDodb", null, 1);
                         db.addTask(nameStr, descriptionStr, statusStr);
+                        finish();
                     }catch (Exception e){
                         Log.e("connection failed", "exception", null);
                     }
@@ -66,7 +67,6 @@ public class AddTask extends AppCompatActivity {
 
                 // Optionally, you can log the values to check if they are correct
                 Log.d("AddTask", "Task Name: " + nameStr + ", Description: " + descriptionStr + ", Status: " + statusStr);
-                finish();
             }
         });
 
