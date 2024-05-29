@@ -64,7 +64,9 @@ public class AddTask extends AppCompatActivity {
                     try {
                         DatabaseHandler db = new DatabaseHandler(AddTask.this, "toDodb", null, 1);
                         db.addTask(nameStr, descriptionStr, Newstatus);
-                        finish();
+                        Intent i = new Intent(v.getContext(), MainActivity.class);
+                        startActivity(i);
+
                     }catch (Exception e){
                         Log.e("connection failed", "exception", null);
                     }
@@ -78,8 +80,7 @@ public class AddTask extends AppCompatActivity {
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(v.getContext(), MainActivity.class);
-                startActivity(i);
+                finish();
             }
         });
         ArrayList<Spinner_item> spinner_list = new ArrayList<Spinner_item>();
