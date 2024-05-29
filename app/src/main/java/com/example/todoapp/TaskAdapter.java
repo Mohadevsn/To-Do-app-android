@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
 
 import java.util.ArrayList;
@@ -47,7 +48,7 @@ public class TaskAdapter extends ArrayAdapter<Task> {
 
 
         TextView taskName = row.findViewById(R.id.taskName);
-        Button statusButton = row.findViewById(R.id.statusButton);
+        CardView statusButton = row.findViewById(R.id.statusButton);
 
         Task task = getItem(position);
         int colorId;
@@ -77,7 +78,7 @@ public class TaskAdapter extends ArrayAdapter<Task> {
             }
 
 
-            statusButton.setBackgroundColor(ContextCompat.getColor(context, colorId));
+            statusButton.setCardBackgroundColor(ContextCompat.getColor(context, colorId));
         }
 
         return row;

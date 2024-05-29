@@ -20,12 +20,15 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.util.ArrayList;
+
 public class ModifyTask extends AppCompatActivity {
 
+    private static  Spinner_item MODSTATU  ;
     EditText name, description;
     Spinner spinner;
 
-    String nameStr, descriptionStr, statusStr, idStr;
+    String nameStr, descriptionStr, statusStr, idStr,Newstatus;
 
     Button modifyButton;
     Button suppressButton;
@@ -46,12 +49,14 @@ public class ModifyTask extends AppCompatActivity {
         modifyButton = findViewById(R.id.modifyButton);
         cancelButton = findViewById(R.id.cancel);
 
+        ArrayList<Spinner_item> spinner_list = new ArrayList<Spinner_item>();
+        spinner_list.add(new Spinner_item("grey","To Do"));
+        spinner_list.add(new Spinner_item("bleu","In progress"));
+        spinner_list.add(new Spinner_item("vert","Done"));
+        spinner_list.add(new Spinner_item("rouge","Bug"));
 
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
-                this,
-                R.array.statusSpinner,
-                android.R.layout.simple_spinner_item
-        );
+
+        AdapterSpinner adapter = new AdapterSpinner(this,R.layout.spinnertest, spinner_list);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
 
@@ -85,13 +90,16 @@ public class ModifyTask extends AppCompatActivity {
         description.setText(descriptionStr);
 
         modifyButton.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
+                MODSTATU = (Spinner_item) spinner.getSelectedItem();
+                Newstatus = MODSTATU.getText();
 
                 databaseHandler = new DatabaseHandler(v.getContext(), "toDodb", null, 1);
                 try {
-                    databaseHandler.updateTask(idStr,name.getText().toString(), description.getText().toString(), spinner.getSelectedItem().toString() );
-                    Toast.makeText(v.getContext(), "Select on spinner:"+ spinner.getSelectedItem().toString(), Toast.LENGTH_LONG).show();
+                    databaseHandler.updateTask(idStr,name.getText().toString(), description.getText().toString(), Newstatus );
+                    Toast.makeText(v.getContext(), "Select on spinner:"+ Newstatus, Toast.LENGTH_LONG).show();
                 }catch (SQLException e){
                     Log.e("modify", "onClick: modify Button", null);
                 }

@@ -19,6 +19,8 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.util.ArrayList;
+
 public class AddTask extends AppCompatActivity {
 
     Button addButton;
@@ -27,7 +29,9 @@ public class AddTask extends AppCompatActivity {
     EditText name, description;
     Spinner spinner;
 
-    String nameStr, descriptionStr, statusStr;
+    String nameStr, descriptionStr,Newstatus;
+    Spinner_item statusStr;
+
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -49,7 +53,8 @@ public class AddTask extends AppCompatActivity {
             public void onClick(View v) {
                 nameStr = name.getText().toString();
                 descriptionStr = description.getText().toString();
-                statusStr = spinner.getSelectedItem().toString();
+                statusStr = (Spinner_item) spinner.getSelectedItem();
+                Newstatus = statusStr.getText();
 
                 if(nameStr.isEmpty() ){
                     Toast.makeText(AddTask.this, "Une tache sans nom n'est pas valide", Toast.LENGTH_LONG).show();
@@ -58,7 +63,7 @@ public class AddTask extends AppCompatActivity {
                 else {
                     try {
                         DatabaseHandler db = new DatabaseHandler(AddTask.this, "toDodb", null, 1);
-                        db.addTask(nameStr, descriptionStr, statusStr);
+                        db.addTask(nameStr, descriptionStr, Newstatus);
                         finish();
                     }catch (Exception e){
                         Log.e("connection failed", "exception", null);
@@ -66,7 +71,7 @@ public class AddTask extends AppCompatActivity {
                 }
 
                 // Optionally, you can log the values to check if they are correct
-                Log.d("AddTask", "Task Name: " + nameStr + ", Description: " + descriptionStr + ", Status: " + statusStr);
+                Log.d("AddTask", "Task Name: " + nameStr + ", Description: " + descriptionStr + ", Status: " + Newstatus);
             }
         });
 
@@ -77,12 +82,14 @@ public class AddTask extends AppCompatActivity {
                 startActivity(i);
             }
         });
+        ArrayList<Spinner_item> spinner_list = new ArrayList<Spinner_item>();
+        spinner_list.add(new Spinner_item("grey","To Do"));
+        spinner_list.add(new Spinner_item("bleu","In progress"));
+        spinner_list.add(new Spinner_item("vert","Done"));
+        spinner_list.add(new Spinner_item("rouge","Bug"));
 
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
-                this,
-                R.array.statusSpinner,
-                android.R.layout.simple_spinner_item
-        );
+
+        AdapterSpinner adapter = new AdapterSpinner(this,R.layout.spinnertest, spinner_list);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
 
