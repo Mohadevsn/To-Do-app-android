@@ -39,7 +39,7 @@
                 android:clickable="true"
                 android:focusable="true"
                 android:layout_marginRight="20dp"
-                />
+                tools:ignore="ExtraText" />
 
 
         </RelativeLayout>
@@ -92,10 +92,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/filterActionMenu"
-                android:layout_marginTop="10dp"
-                android:text="To do"
-                android:textSize="25sp"
                 android:layout_marginLeft="20sp"
+                android:layout_marginTop="10dp"
+                android:text="To Do"
+                android:textSize="25sp"
                 tools:ignore="NotSibling" />
 
             <CheckBox

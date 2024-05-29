@@ -156,7 +156,7 @@ public class MainActivity extends AppCompatActivity {
         bug = findViewById(R.id.bugCheck);
 
         if(todo.isChecked()){
-            checkedStatus.add("To do");
+            checkedStatus.add("To Do");
         }
         if(inProgress.isChecked()){
             checkedStatus.add("In progress");
